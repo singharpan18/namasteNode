@@ -2,8 +2,10 @@ require("./xyz.js");//one module into other
 
 //const calculateSum = require("./sum.js");
 //const obj = require("./sum.js");
-const {x, calculateSum} = require("./sum.js");
-const {calculateMultiply} = require("./multiply.js");
+// const {x, calculateSum} = require("./sum.js");
+// const {calculateMultiply} = require("./multiply.js");
+
+const {calculateMultiply, calculateSum} = require("./calculate");
 
 var name = "Namaste Node";
 
@@ -16,7 +18,7 @@ var b = 20;
 // console.log(obj.x);
 
 calculateSum(a, b);
-console.log(x);
+//console.log(x);
 
 calculateMultiply(a, b);
 
