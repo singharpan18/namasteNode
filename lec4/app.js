@@ -1,10 +1,9 @@
-//require("./xyz.js");//one module into other
+require("./xyz.js");//one module into other
 
 //const calculateSum = require("./sum.js");
 //const obj = require("./sum.js");
-//const {x, calculateSum} = require("./sum.js");
-
-import {x, calculateSum } from "./sum.js";
+const {x, calculateSum} = require("./sum.js");
+const {calculateMultiply} = require("./multiply.js");
 
 var name = "Namaste Node";
 
@@ -18,5 +17,7 @@ var b = 20;
 
 calculateSum(a, b);
 console.log(x);
+
+calculateMultiply(a, b);
 
 console.log(globalThis === global);
