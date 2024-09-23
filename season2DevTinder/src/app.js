@@ -6,11 +6,23 @@ const app = express();
 //app.listen(console.log("Server is successfull running"));
 
 // This will only handle GET call to /user
-app.get("/user", (req, res) => {
-    res.send({ firstName: "Akshay", lastName: "Saini" });
-  });  
+// app.get("/user", (req, res) => {
+//     res.send({ firstName: "Akshay", lastName: "Saini" });
+//   });  
 
-  app.post("/user", (req, res) => {
+//Explore routing and use of ?, + , ()?, * in the routes
+//Use of regex in routes /a/ , /.*fly$/
+app.get(/.*fly$/, (req, res) => {
+   res.send({ firstName: "Akshay", lastName: "Saini" });
+ });  
+
+//reading data from params
+app.get("/user/:userId/:name/:password", (req, res) => {
+    console.log(req.params);
+    res.send({ firstName: "Akshay", lastName: "Saini" });
+  });
+  
+app.post("/user", (req, res) => {
     console.log(req.body);
     // saving data to DB
     res.send("Data successfully saved to the database!");  
