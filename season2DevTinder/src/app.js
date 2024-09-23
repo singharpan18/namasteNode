@@ -5,19 +5,34 @@ const app = express();
 //create a sever
 //app.listen(console.log("Server is successfull running"));
 
+// This will only handle GET call to /user
+app.get("/user", (req, res) => {
+    res.send({ firstName: "Akshay", lastName: "Saini" });
+  });  
 
+  app.post("/user", (req, res) => {
+    console.log(req.body);
+    // saving data to DB
+    res.send("Data successfully saved to the database!");  
+  })
+
+  app.delete("/user", (req, res) => {
+    res.send("Deleted successfully!");
+  });
+  
 //write request handlers for /test, /hello
+// this will match all the HTTP method API calls to /test
 app.use("/test", (req, res) => {
     res.send("Hello from test server");
 });
 
-app.use("/hello", (req, res) => {
-    res.send("hello from hello server....");
-});
+// app.use("/hello", (req, res) => {
+//     res.send("hello from hello server....");
+// });
 
-app.use("/", (req, res) => {
-    res.send("from /....");
-})
+// app.use("/", (req, res) => {
+//     res.send("from /....");
+// })
 
 
 //listen to port no 7777
