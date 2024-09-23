@@ -15,6 +15,11 @@ app.use("/hello", (req, res) => {
     res.send("hello from hello server....");
 });
 
+app.use("/", (req, res) => {
+    res.send("from /....");
+})
+
+
 //listen to port no 7777
 app.listen(7777, () => {
     console.log("Server is successfully listening on port 7777......")
