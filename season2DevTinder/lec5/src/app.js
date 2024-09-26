@@ -33,7 +33,7 @@ const app = express();
 );*/
 
 //writing-auth-middleware -> instead of writing auth call before each api call we have created auth middleware and used it
-const {adminAuth, userAuth} = require("./middlewares/auth");
+/*const {adminAuth, userAuth} = require("./middlewares/auth");
 
 app.use("/admin", adminAuth);
 
@@ -52,9 +52,33 @@ app.post("/user/login", (req, res) => {
 
 app.get("/user/data", userAuth, (req, res) => {
   res.send("User data sent!!");
+});*/
+
+//error handling
+app.use("/", (err, req, res, next) => {
+  if(err){
+    //log your error
+    res.Status(500).send("Something went wrong");
+  }
 });
 
+app.get("/getUserDta", (req, res) => {
+  try{
+    //logic to db call and get user data
+  }catch(err){
+    res.status(500).send("Some error contact support team");
+  }
+});
+
+//add this in last if anythin wrong happens which is not handle this error will display
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    // Log your error
+    res.status(500).send("something went wrong");
+  }
+});
 
 app.listen(7777, () => {
   console.log("Server is successfully listening on port 7777...");
 });
+
