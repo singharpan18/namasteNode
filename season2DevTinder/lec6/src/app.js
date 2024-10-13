@@ -4,6 +4,8 @@ const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./models/user");
 const app = express();
+const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 //use this middleware for all request which convert json to js object
 app.use(express.json());
@@ -19,6 +21,30 @@ app.post("/signup", async (req, res) => {
     res.status(400).send("Error saving the user" + err.message);
   }
 })
+
+app.post("/signup2", async (req, res) => {
+
+  try{
+    //validation of data
+    validateSignUpData(req);
+    const { firstName, lastName, emailId, password } = req.body;
+    //Encrypt the password
+    const passwordHash = await bcrypt.hash(password, 10);
+    console.log(passwordHash);
+    //creating a new instance of the user model
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    })
+    await user.save();
+    res.send("User added successfully!");
+  } catch (err){
+    res.status(400).send("ERROR: " + err.message);
+  }
+})
+
 
 //get user by email by find one method -> it returns the first created user as object
 app.get("/user", async (req, res) => {
@@ -82,7 +108,7 @@ app.patch("/user/:userId", async (req, res) => {
     const isUpdateAllowed = Object.keys(data).every((k) =>
       ALLOWED_UPDATED.includes(k)
     );
-    
+
     if (!isUpdateAllowed) {
       throw new Error("Update not allowed");
     }
