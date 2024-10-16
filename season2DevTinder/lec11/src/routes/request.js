@@ -69,7 +69,7 @@ requestRouter.post("/request/review/:status/:requestId", userAuthNew, async(req,
             return res.status(404).json({ message: "Connection request not found!"});
         }
 
-        ConnectionRequest.status =status;
+        connectionRequest.status =status;
 
         const data = await connectionRequest.save();
 

@@ -19,8 +19,8 @@ POST/request/review/rejected/:requestId
 # convert both into one api -> POST/request/review/:status/:userId 
 
 ## userRouter
-GET/user/connections
-GET/user/requests
-GET/user/feed
+GET /user/requests/received
+GET /user/connections
+GET /user/feed - Gets you the profiles of other users on platform
 
 status: ignored, interested, accepted, rehected
