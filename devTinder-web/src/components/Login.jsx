@@ -1,23 +1,57 @@
-import React from 'react'
+import axios from 'axios';
+import React from 'react';
+import { useState } from 'react';
+import { BASE_URL } from '../../utilis/constants';
 
 const Login = () => {
+
+  const [emailId, setEmailId] = useState("johndoe2@example.com");
+  const [password, setPassword] = useState("W@llet1232");
+
+  const handleLogin = async () => {
+    console.log("button clicked!!");
+    try{
+      const res = await axios.post(
+        BASE_URL + "login",
+        {
+          emailId,
+          password
+        },
+        { withCredentials: true}
+      );
+      //dispatch(assuser(res.data));
+      return Navigate("/")
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <div className="card bg-base-100 w-96 shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title">Login</h2>
-        <label className="form-control w-full max-w-xs">
-  <div className="label">
-    <span className="label-text">What is your name?</span>
-    <span className="label-text-alt">Top Right label</span>
-  </div>
-  <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-  <div className="label">
-    <span className="label-text-alt">Bottom Left label</span>
-    <span className="label-text-alt">Bottom Right label</span>
-  </div>
-</label>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+    <div className='flex justify-center my-10'>
+      <div className="card bg-base-100 w-96 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title">Login</h2>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Email ID:</span>
+            </div>
+            <input type="text" value={emailId} className="input input-bordered w-full max-w-xs"
+              onChange={(e) => setEmailId(e.target.value)}
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Password</span>
+            </div>
+            <input type="text" value={password} className="input input-bordered w-full max-w-xs"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <div className="card-actions justify-center m-2">
+            <button className="btn btn-primary"
+              onClick={handleLogin}
+            >Login</button>
+          </div>
         </div>
       </div>
     </div>
