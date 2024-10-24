@@ -10,24 +10,25 @@ const Login = () => {
 
   const [emailId, setEmailId] = useState("johndoe2@example.com");
   const [password, setPassword] = useState("W@llet1232");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     console.log("button clicked!!");
-    try{
+    try {
       const res = await axios.post(
         BASE_URL + "/login",
         {
           emailId,
           password
         },
-        { withCredentials: true}
+        { withCredentials: true }
       );
       dispatch(addUser(res.data));
       return navigate("/")
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data || "Something went wrong");
     }
   };
 
@@ -36,22 +37,25 @@ const Login = () => {
       <div className="card bg-base-100 w-96 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Login</h2>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Email ID:</span>
-            </div>
-            <input type="text" value={emailId} className="input input-bordered w-full max-w-xs"
-              onChange={(e) => setEmailId(e.target.value)}
-            />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Password</span>
-            </div>
-            <input type="text" value={password} className="input input-bordered w-full max-w-xs"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+          <div>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Email ID:</span>
+              </div>
+              <input type="text" value={emailId} className="input input-bordered w-full max-w-xs"
+                onChange={(e) => setEmailId(e.target.value)}
+              />
+            </label>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Password</span>
+              </div>
+              <input type="text" value={password} className="input input-bordered w-full max-w-xs"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+          </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center m-2">
             <button className="btn btn-primary"
               onClick={handleLogin}
