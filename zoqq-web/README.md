@@ -26,6 +26,12 @@ Refactor our code to add constants file + create a components folder
 You should not be access other routes without login
 If token is not present, redirect user to login page
 logout features
+Get the feed and add the feed in th store
+build the user card on feed
+Edit Profile Feature
+Show Toast Message on save of profile
 
+lec17
+See all my connections
 
 
