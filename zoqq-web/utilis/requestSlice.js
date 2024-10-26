@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const requestSlice = createSlice({
-    name: Requests,
+    name: "requests",
     initialState: null,
     reducers: {
-        addRequests: (state, action) => acryion.payload,
+        addRequests: (state, action) => action.payload,
     },
 });
 
